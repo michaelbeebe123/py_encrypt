@@ -1,105 +1,55 @@
-import tkinter as tk
+# python module for one-timepad
+import onetimepad
+# python module to create GUI
+from tkinter import *
 
-root = tk.Tk()
-root.geometry("600x400")
-
-class Encryptor(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.master = master
-        self.pack()
-
-        # ---------------------------------------------------------
-        #                      QUIT BUTTON
-        # ---------------------------------------------------------
-        quit_button = tk.Button(
-            text="QUIT",
-            fg="white",
-            bg="black",
-            width=10,
-            height=2,
-            command=self.master.destroy
-        )
-        quit_button.pack(
-            side="bottom",
-            padx=10,
-            pady=10
-        )
-
-        # ---------------------------------------------------------
-        #                           LABEL
-        # ---------------------------------------------------------
-        label = tk.Label(
-            text="Beebe Encryption",
-            font=("Arial Bold", 35)
-        )
-        label.pack(
-            # padx=5,
-            # pady=5
-        )
-
-        # ---------------------------------------------------------
-        #                       INPUT BOX
-        # ---------------------------------------------------------
-        # TODO: MAKE IT LOOK THE WAY IT'S SUPPOSED TO
-        entry_box = tk.Entry(
-            text="",
-            width=50,
-            xscrollcommand=True
-        )
-        entry_box.pack(
-            padx=15,
-            pady=15
-        )
-
-        # ---------------------------------------------------------
-        #                    TODO: OUTPUT BOX
-        # ---------------------------------------------------------
-
-        # ---------------------------------------------------------
-        #                   ENCRPYT BUTTON
-        # ---------------------------------------------------------
-        # TODO: ENCRYPT FUNC
-        # TODO: ALIGN THE BUTTON PROPERLY
-        def encrypt():
-            pass
-
-        encrypt_button = tk.Button(
-            text="ENCRYPT",
-            command=encrypt,
-            fg="white",
-            bg="black",
-            width=10,
-            height=2
-        )
-        encrypt_button.pack(
-            side="left",
-            padx=10,
-            pady=10
-        )
-
-        # ---------------------------------------------------------
-        #                   DECRYPT BUTTON
-        # ---------------------------------------------------------
-        # TODO: DECRYPT FUNC
-        # TODO: ALIGN THE BUTTON PROPERLY
-        def decrypt():
-            pass
-
-        decrypt_button = tk.Button(
-            text="DECRYPT",
-            command=decrypt,
-            fg="white",
-            bg="black",
-            width=10,
-            height=2
-        )
-        decrypt_button.pack(
-            side="right",
-            padx=10,
-            pady=10
-        )
+root = Tk()
+root.title("CRYPTOGRAPHY")
+root.geometry("800x600")
 
 
-app = Encryptor(master=root)
-app.mainloop()
+def encryptMessage():
+    pt = e1.get()
+
+    # inbuilt function to encrypt a message
+    ct = onetimepad.encrypt(pt, 'random')
+    e2.insert(0, ct)
+
+
+def decryptMessage():
+    ct1 = e3.get()
+
+    # inbuilt function to decrypt a message
+    pt1 = onetimepad.decrypt(ct1, 'random')
+    e4.insert(0, pt1)
+
+
+# creating labels and positioning them on the grid
+label1 = Label(root, text='plain text')
+label1.grid(row=10, column=1)
+label2 = Label(root, text='encrypted text')
+label2.grid(row=11, column=1)
+l3 = Label(root, text="cipher text")
+l3.grid(row=10, column=10)
+l4 = Label(root, text="decrypted text")
+l4.grid(row=11, column=10)
+
+# creating entries and positioning them on the grid
+e1 = Entry(root)
+e1.grid(row=10, column=2)
+e2 = Entry(root)
+e2.grid(row=11, column=2)
+e3 = Entry(root)
+e3.grid(row=10, column=11)
+e4 = Entry(root)
+e4.grid(row=11, column=11)
+
+# creating encryption button to produce the output
+ent = Button(root, text="encrypt", bg="red", fg="white", command=encryptMessage)
+ent.grid(row=13, column=2)
+
+# creating decryption button to produce the output
+b2 = Button(root, text="decrypt", bg="green", fg="white", command=decryptMessage)
+b2.grid(row=13, column=11)
+
+root.mainloop()
