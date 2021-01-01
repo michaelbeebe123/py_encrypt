@@ -5,7 +5,7 @@ from tkinter import *
 
 root = Tk()
 root.title("CRYPTOGRAPHY")
-root.geometry("800x600")
+root.geometry("600x200")
 
 
 def encryptMessage():
